@@ -56,6 +56,13 @@ fn main() -> Result<()> {
         .long("yesterday")
         .help("show yesterdays' activities")
         .required(false)
+        .conflicts_with_all(&["from_date", "to_date", "date", "today", "last_3_days"])
+        .takes_value(false);
+    
+    let arg_last_3_days = Arg::with_name("last_3_days")
+        .long("last_3_days")
+        .help("show the last 3 days' activities")
+        .required(false)
         .conflicts_with_all(&["from_date", "to_date", "date", "today"])
         .takes_value(false);
 
@@ -63,7 +70,7 @@ fn main() -> Result<()> {
         .long("current_week")
         .help("show activities of the current week")
         .required(false)
-        .conflicts_with_all(&["from_date", "to_date", "date", "today", "yesterday"])
+        .conflicts_with_all(&["from_date", "to_date", "date", "today", "yesterday", "last_3_days"])
         .takes_value(false);
 
     let arg_last_week = Arg::with_name("last_week")
@@ -76,6 +83,7 @@ fn main() -> Result<()> {
             "date",
             "today",
             "yesterday",
+            "last_3_days",
             "current_week",
         ])
         .takes_value(false);
@@ -164,6 +172,7 @@ To get started, view the `start` help with `bartib start --help`")
                 .arg(&arg_date)
                 .arg(&arg_today)
                 .arg(&arg_yesterday)
+                .arg(&arg_last_3_days)
                 .arg(&arg_current_week)
                 .arg(&arg_last_week)
                 .arg(&arg_group)
@@ -199,6 +208,7 @@ To get started, view the `start` help with `bartib start --help`")
                 .arg(&arg_date)
                 .arg(&arg_today)
                 .arg(&arg_yesterday)
+                .arg(&arg_last_3_days)
                 .arg(&arg_current_week)
                 .arg(&arg_last_week)
                 .arg(&arg_group)
@@ -418,6 +428,11 @@ fn create_filter_for_arguments<'a>(sub_m: &'a ArgMatches) -> ActivityFilter<'a> 
 
     if sub_m.is_present("yesterday") {
         filter.date = Some(today - Duration::days(1));
+    }
+    
+    if sub_m.is_present("last_3_days") {
+        filter.from_date = Some(today - Duration::days(4));
+        filter.to_date = Some(today - Duration::days(1));
     }
 
     if sub_m.is_present("current_week") {

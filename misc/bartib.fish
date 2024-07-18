@@ -112,6 +112,7 @@ complete -c bartib -n "__fish_seen_subcommand_from list" -l last_week -d "show a
 complete -c bartib -n "__fish_seen_subcommand_from list" -l no_grouping -d "do not group activities by date in list" 
 complete -c bartib -n "__fish_seen_subcommand_from list" -l today -d "show activities of the current day" 
 complete -c bartib -n "__fish_seen_subcommand_from list" -l yesterday -d "show yesterdays\" activities"
+complete -c bartib -n "__fish_seen_subcommand_from list" -l last_3_days -d "show last 3 days\" activities"
 complete -c bartib -n "__fish_seen_subcommand_from list" -s n -l number -d "maximum number of activities to display"
 complete -c bartib -n "__fish_seen_subcommand_from list" -s p -l project -d "do list activities for this project only" -f
 complete -c bartib -n "__fish_seen_subcommand_from list; and __fish_seen_argument -s p -l project; and begin; __is_last_argument -s p -l project; or not __fish_seen_argument -s d -l description; end" -a "(__fish_complete_bartib_projects)" -f
@@ -124,6 +125,7 @@ complete -c bartib -n "__fish_seen_subcommand_from report" -l current_week -d "s
 complete -c bartib -n "__fish_seen_subcommand_from report" -l last_week -d "show activities of the last week" 
 complete -c bartib -n "__fish_seen_subcommand_from report" -l today -d "show activities of the current day" 
 complete -c bartib -n "__fish_seen_subcommand_from report" -l yesterday -d "show yesterdays\" activities" 
+complete -c bartib -n "__fish_seen_subcommand_from report" -l last_3_days -d "show last 3 days\" activities" 
 complete -c bartib -n "__fish_seen_subcommand_from report" -s n -l number -d "maximum number of activities to display" -f
 complete -c bartib -n "__fish_seen_subcommand_from report" -s p -l project -d "do report activities for this project only" -f
 complete -c bartib -n "__fish_seen_subcommand_from report; and __fish_seen_argument -s p -l project; and begin; __is_last_argument -s p -l project; or not __fish_seen_argument -s d -l description; end" -a "(__fish_complete_bartib_projects)" -f
